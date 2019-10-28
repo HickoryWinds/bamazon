@@ -2,6 +2,10 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
 
+// tableLength store length of products table to check if user
+//inputs
+var tableLength;
+
 // create object for connecting to mysql database
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -22,6 +26,8 @@ function listIt(){
     // display all contents of bamazon database products table
     var query = 'SELECT * FROM products;'
     connection.query(query, function(err, results){
+        // store tableLength for id validity check
+        tableLength = results.length;
         // if error occurs, show error message
         if (err) throw err;
         // display inventory
@@ -68,21 +74,27 @@ function runPurchase(){
     }
     ]).then(function(answer){
         var query = 'SELECT * FROM products WHERE ?;';
-        connection.query(query, { id: answer.itemId }, function(err, results){
-        // if error occurs, show error message
-        if (err) throw err;
-        // check is sufficient inventory in stock, if so complete purchase by showing
-        // buyer their cost and updating inventory level
-        if (results[0].stock_quantity >  answer.quantity){
-            console.log('You have successfully purchased ' + answer.quantity + ' '  +
-            results[0].product_name + '(s) for a total of $' + answer.quantity*results[0].price + '.00');
-            updateInventory((results[0].stock_quantity - answer.quantity), results[0].id);
-        } else {
-            console.log('Insufficient quantity in stock.');
-            // ask user what they would like to do
+        // check is user entered valid product id
+        if(tableLength < answer.itemId) {
+            console.log('Invalid Id number.');
             start();
+        } else {
+            connection.query(query, { id: answer.itemId }, function(err, results){
+                // if error occurs, show error message
+                if (err) throw err;
+                // check is sufficient inventory in stock, if so complete purchase by showing
+                // buyer their cost and updating inventory level
+                if (results[0].stock_quantity >  answer.quantity){
+                    console.log('You have successfully purchased ' + answer.quantity + ' '  +
+                    results[0].product_name + '(s) for a total of $' + (answer.quantity*results[0].price).toFixed(2));
+                    updateInventory((results[0].stock_quantity - answer.quantity), results[0].id);
+                } else {
+                    console.log('Insufficient quantity in stock.');
+                    // ask user what they would like to do
+                    start();
+                }
+            });
         }
-    });
     });
 
 }
