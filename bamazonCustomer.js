@@ -36,6 +36,7 @@ function listIt(){
             ' || Department Name: ' + results[i].department_name + ' || Price: ' + results[i].price +
             ' || Stock Quantity: ' + results[i].stock_quantity);
         }
+        console.log('\n');
         runPurchase();
     });
 }
@@ -76,7 +77,7 @@ function runPurchase(){
         var query = 'SELECT * FROM products WHERE ?;';
         // check is user entered valid product id
         if(tableLength < answer.itemId) {
-            console.log('Invalid Id number.');
+            console.log('Invalid Id number.\n');
             start();
         } else {
             connection.query(query, { id: answer.itemId }, function(err, results){
@@ -87,9 +88,10 @@ function runPurchase(){
                 if (results[0].stock_quantity >  answer.quantity){
                     console.log('You have successfully purchased ' + answer.quantity + ' '  +
                     results[0].product_name + '(s) for a total of $' + (answer.quantity*results[0].price).toFixed(2));
-                    updateInventory((results[0].stock_quantity - answer.quantity), results[0].id);
+                    updateSales((results[0].price * answer.quantity), results[0].id + '\n');
+                    updateInventory((results[0].stock_quantity - answer.quantity), results[0].id + '\n');
                 } else {
-                    console.log('Insufficient quantity in stock.');
+                    console.log('Insufficient quantity in stock.\n');
                     // ask user what they would like to do
                     start();
                 }
@@ -99,6 +101,15 @@ function runPurchase(){
 
 }
 
+// function updateInvetory adjusts stock quantities after a successful purchase
+function updateSales(valueSold, id) {
+    var query = 'UPDATE products SET product_sales= ? WHERE id= ?;'
+    connection.query(query, [valueSold, id], function(err){
+        if (err) throw err;
+        console.log('Product Sales Updated.')
+        // start();
+    })
+}
 // function updateInvetory adjusts stock quantities after a successful purchase
 function updateInventory(numberPurchased, id) {
     var query = 'UPDATE products SET stock_quantity= ? WHERE id= ?;'
