@@ -2,7 +2,7 @@
 var inquirer = require('inquirer');
 var mysql = require('mysql');
 
-// create object for connection to my sql database
+// create object for connection to mysql database
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -16,7 +16,8 @@ connection.connect(function(err){
     if (err) throw err;
 });
 
-// function start() creats menu of manager options
+// function start() creats menu of manager options and
+// selects which function to use
 function start() {
     inquirer.prompt({
         name: 'options',
@@ -28,7 +29,7 @@ function start() {
             'Add New Product',
             'Exit']
     }).then(function (answer) {
-        console.log(answer.options);
+        // console.log(answer.options);
         switch(answer.options) {
             case 'View Products for Sale':
                 allProducts();
@@ -140,12 +141,14 @@ function addItem() {
             message: 'Item quantity: '
         }
     ]).then(function(answer) {
-        // create database query
-        var query = 'INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?';
+        
+        // var query = 'INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?';
         // connection.query(query, [(answer.itemName, answer.itemDept, parseFloat(answer.itemPrice), parseInt(answer.itemQuant))], function(err) {
-        //     if (err) throw err;
-        //     console.log('Item added successfully.');
-        // });
+            //     if (err) throw err;
+            //     console.log('Item added successfully.');
+            // });
+
+            // connect to database and query to insert data
         connection.query(
             "INSERT INTO products SET ?",
             {
