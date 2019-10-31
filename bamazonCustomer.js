@@ -33,7 +33,7 @@ function listIt(){
         // display inventory
         for (var i = 0; i < results.length; i++) {
             console.log('id: ' + results[i].id + ' || Product Name: ' + results[i].product_name +
-            ' || Department Name: ' + results[i].department_name + ' || Price: ' + results[i].price +
+            ' || Department Name: ' + results[i].department_name + ' || Price: ' + results[i].price.toFixed(2) +
             ' || Stock Quantity: ' + results[i].stock_quantity);
         }
         console.log('\n');
