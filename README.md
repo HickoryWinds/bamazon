@@ -45,16 +45,18 @@
 
 #### The table used by the supervisor is created by using a right join to display the departments table and the sum of product sales from the products table. A profitibility calculation is made using the overhead from the departments table and the sum of product sales from the products table.
 
-![picture](bamS-sales-dept-1.png)
+![picture](bamS-sales-dept.png)
 
 #### The supervisor can add a new department to the departments table by entering the department name and over head costs.
 
 ![picture](bamS-new-dept.png)
+
 ![picture](bamS-new-dept-display.png)
 
 #### This may be a department that is has no items in the products table so that when a the manager Views the Product Sales an error would be caused by having a null value returned for product sales, so the code includes a substitution of 0 for null so that the value can be displayed.
 
 ![picture](mysql-new-dept-dept.png)
+
 ![picture](mysql-new-dept-product.png)
 
 
