@@ -64,7 +64,9 @@ function viewSalesByDept() {
         if (err) throw err;
         // list all departments  and display overhead costs from departments table and sum of product sales from products
         //table; also calculate profit from product sales and overhead costs
+        
         for (var i = 0; i < (results.length); i++) {
+            if (results[i].product_sales === null) {results[i].product_sales = 0;}
             transArray[i] = [results[i].id, results[i].department_name, results[i].overhead_costs.toFixed(2), results[i].product_sales.toFixed(2),
             (results[i].product_sales - results[i].overhead_costs).toFixed(2)];
             data.push(transArray[i]);
