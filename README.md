@@ -1,21 +1,21 @@
 ## bamazon
 
-#### bamazon is a sales/inventory/management tool which consists of three JavaScript modules: bamazonCustomer, bamazonManager, and bamazonManager. Each of these modules use MySQL, JavaScript, and node.js technologies. All modules use npm inquirer to construct a user interface using questions. Each module connects to MySQL via npm mysql.
+#### bamazon is a sales/inventory/management tool which consists of three JavaScript modules: bamazonCustomer, bamazonManager, and bamazonManager. Each of these modules use MySQL, JavaScript, and node.js technologies. All modules use npm inquirer to construct a user interface using questions. Each module connects to MySQL via npm mysql. A database called bamazon is created for local storage in MySQL which contains tables called products and departments.
 
-### bamazonCustomer allows a customer to purchase an item after viewing a list of available items. 
+### bamazonCustomer allows a customer to purchase an item after viewing a list of available items retrieved from the products table in the bamazon database. 
 
 ![picture](bamC-start.png)
 
-#### If the customer enters in an invalid Id number for the purchase, a message is displayed and the customer is taken back to the start menu.
+#### The customer must enter a valid Id number for the purchase. If an invalid Id number is entered, a message is displayed.
 
 ![picture](bamC-nogo.png)
 
 
-#### If there is not sufficient inventory, a message is shown. In both instances the customer is taken back to the start screen.
+#### If there is not sufficient inventory to fulfill the cusomer's request, a message is shown.
 
 ![picture](bamC-fail.png)
 
-#### If a sufficient number of items are available in inventory, the customer's purchase is completed and the number of items and total cost are displayed.
+#### When a sufficient number of items are available in inventory, the customer's purchase is completed and the number of items and total cost are displayed. In all cases, the customer is take back to the start menu.
 
 ![picture](bamC-success.png)
 
@@ -23,7 +23,7 @@
 
 ![picture](bamM-start.png)
 
-#### The manager's view of inventory is the same that is displayed to the customer when making a purchase.
+#### The manager's view of inventory is the same that is displayed to the customer when making a purchase which is retrieved from the products table.
 
 ![picture](bamM-stock.png)
 
@@ -31,11 +31,11 @@
 
 ![picture](bamM-low.png)
 
-#### The manager may add to the number of items of product.
+#### The manager may add to the number of items of product by entering the product Id number and the quantity to be added.
 
 ![picture](bamM-low-add.png)
 
-#### An entirely new product may be added to inventory by the manager.
+#### An entirely new product may be added to inventory by the manager. To do so, the manager must enter the product name, department for the product, the price of the item and the quantity intially available.
 
 ![picture](bamM-inventory-add.png)
 
