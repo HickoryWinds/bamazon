@@ -1,3 +1,6 @@
+// bamazonManager provides the following tools: view all products for sale, view producs with less than 5 items in inventory,
+// add more items to current inventory, and add a new product to the product list.
+
 // import inquirer and mysql modules
 var inquirer = require('inquirer');
 var mysql = require('mysql');

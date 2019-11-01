@@ -1,3 +1,8 @@
+// bamazonCustomer allows a customer to purchase an item after viewing a list of available items.
+// If a sufficient number of items are available in inventory, the customer's purchase is completed
+// and the number of items and total cost are displayed. If there is not sufficient inventory,
+// a message is shown. In both instances the customer is taken back to the start screen.
+
 // import mysql and inquirer modules
 var mysql = require('mysql');
 var inquirer = require('inquirer');

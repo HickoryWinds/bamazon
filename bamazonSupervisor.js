@@ -1,3 +1,6 @@
+// bamazonSupervisor can be used to display overhead cost, total sales, and profitability by department.
+// The manager can also add a new department to the departments table.
+
 // import inquirer and mysql modules
 var inquirer = require('inquirer');
 var mysql = require('mysql');
